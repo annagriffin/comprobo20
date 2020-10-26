@@ -30,7 +30,9 @@ class BallTracker(object):
     def process_image(self, msg):
         """ Process image messages from ROS and stash them in an attribute
             called cv_image for subsequent processing """
+        
         self.cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+        self.binary_image = cv2.inRange(self.cv_image, (200,200,200), (255,255,255))
 
     def run(self):
         """ The main run loop, in this node it doesn't do anything """
